@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Sorto-Senpai</h1>
+    </header>
+
+    <div class="panel">
+        <div class="panel_item size_one">
+            <label for="speed">SPEED</label>
+            <input type="range" id="speed" min="1" max="30" name="speed" value="10">
+    
+        </div>
+        <div class="panel_item size_two">
+            <label for="elements">ELEMENTS</label>
+            <input type="number" name="elements" id="no_of_elements" value="10" min="10">
+        </div>
+       
+        <button class="btn panel_item create size_three" id="create">CREATE</button>
+    </div>
+    
+    <div class="wrap">
+        <div class="container" id="sort-box">
+        </div>
+        <div class="buttons">
+            <button class='btn hide' id="start">START</button>
+            <button class='btn hide' id="reset">RESET</button>
+            <button class="btn long hide" id="remove">REMOVE ALL</button>
+        </div>
+    </div>
+    <footer class="footer">
+        <p> A SITE TO SEE BY <span> PAVIT KAILAY </span></p>
+    </footer>
+    <script src="logic.js"></script>
+</body>
+</html>
