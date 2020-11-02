@@ -116,8 +116,8 @@ function updateDivs(currentIndex,nextIndex, action)
 
         }
     },totalDelay);
-    addedDelay += 250;
-    delay = 250;
+    addedDelay += 200;
+    delay = 200;
     
         return intervalId;
 }
