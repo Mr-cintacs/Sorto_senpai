@@ -251,3 +251,6 @@ input[type="number"]{
     font-size:1.2rem;
     font-weight:bolder;
 }
+.fa-github{
+    color:black;
+}
