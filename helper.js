@@ -5,10 +5,10 @@ let getRandom=(min,max)=>{
 //FUNCTION TO PUT RANDOM VALUES IN ARRAY
 function fillArray(no_of_elements)
 {
-    arr= [];
+    let arr= [];
     for(let i=0;i<no_of_elements;i++)
     {
-        random_no= getRandom(5,100);
+        let random_no= getRandom(5,100);
         arr.push(random_no);
     }
 

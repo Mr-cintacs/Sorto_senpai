@@ -1,40 +1,16 @@
 import * as helper from "./helper.js";
 let values,items,innerDelay,outterDelay,speed_multiplyer=5;
 let height_multiplyer = 3;
+let wrapContainer = document.querySelector('.wrap');
+console.log(wrapContainer);
 let speed_value = document.getElementById('speed'); 
 let sort_box = document.getElementById('sort-box');
 let input_elements= document.getElementById('no_of_elements');
-
-let getRandom=(min,max)=>{
-    return  Math.floor(Math.random() * (max - min  + 1 )) + min;
-}
-
-//FUNCTION TO PUT RANDOM VALUES IN ARRAY
-function fillArray(no_of_elements)
-{
-    arr= [];
-    for(let i=0;i<no_of_elements;i++)
-    {
-        random_no= getRandom(5,100);
-        arr.push(random_no);
-    }
-
-    //ADJUST HEIGHT OF DIVS ACCORDING TO ARRAY VALUE
-    items= document.getElementsByClassName('item');
-    let index= 0;
-    for(let item of items)
-    {
-        item.style.height= arr[index]*height_multiplyer+'px';
-        index=index + 1;
-    }
-    resetColor();
-    return arr;
-}
-
+let i,j;
 let delay = 0;
 let addedDelay = 0;
 
-//TIMED INSERTION SORT
+
 function insertionSort(values)
 {
     let array = values;
@@ -54,7 +30,7 @@ function insertionSort(values)
     }
     console.log(values);
 }
-//TIMED SELECTION SORT
+
 function selectionSort(values)
 {
     addedDelay = 0;
@@ -79,9 +55,6 @@ function selectionSort(values)
         }
     }
 }
-
-
-
 
 function bubbleSort(values)
 {
@@ -193,7 +166,7 @@ let reset_btn= document.getElementById('reset');
 speed_value.disabled = false;
 reset_btn.addEventListener('click',function(e){
     let no_of_elements = input_elements.value;
-    values= fillArray(no_of_elements);
+    values= helper.fillArray(no_of_elements);
 });
 
 // SPEED VALUE RANGE SLIDER
@@ -231,6 +204,7 @@ create_btn.addEventListener('click',function (e)
     reset_btn.style.visibility = 'visible';
     remove_btn.style.visibility = 'visible';
     sort_box.style.animationName = 'showBox';
+    wrapContainer.style.display = 'flex';
     let no_of_elements = input_elements.value;
     if(no_of_elements > 50)
     {
@@ -252,7 +226,7 @@ create_btn.addEventListener('click',function (e)
         }
     }
 
-    values = fillArray(no_of_elements);
+    values = helper.fillArray(no_of_elements);
     sort_box.style.display= 'flex';
     
     items = document.getElementsByClassName('item');
