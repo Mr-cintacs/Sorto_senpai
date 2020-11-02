@@ -1,10 +1,9 @@
+import * as helper from "./helper.js";
 let values,items,innerDelay,outterDelay,speed_multiplyer=5;
 let height_multiplyer = 3;
 let speed_value = document.getElementById('speed'); 
 let sort_box = document.getElementById('sort-box');
 let input_elements= document.getElementById('no_of_elements');
-let pause= 1;
-console.log(speed_multiplyer);
 
 let getRandom=(min,max)=>{
     return  Math.floor(Math.random() * (max - min  + 1 )) + min;
@@ -29,81 +28,128 @@ function fillArray(no_of_elements)
         index=index + 1;
     }
     resetColor();
-    console.log(arr);
     return arr;
 }
 
-//TIMED BUBBLE SORT
-function sortCheck(){
+let delay = 0;
+let addedDelay = 0;
 
-    let arr= values;
-    let delay = innerDelay;
-    let speed_mul= speed_multiplyer;
-    for(let j=0;j<arr.length-1;j++)
-    {
-        function valueSwap(j)
-        {
-            console.log('value swap called');
-            setTimeout(() => {
-                let smaller_item= document.getElementById(j+1);
-                let larger_item= document.getElementById(j);
-                smaller_item.style.border = "3px black solid";
-                larger_item.style.border = "3px black solid";
-                if(j !=0 )
-                {
-                    let current_item = document.getElementById(j);
-                    let previous_item= document.getElementById(j-1);
-                    current_item.style.background = 'hotpink';
-                    previous_item.style.backgroundColor= 'hotpink';
-                    previous_item.style.border = "none";
-                }
-                if(j == arr.length-2)
-                {
-                    console.log('in the block');
-                    resetColor();
-                }
-                if(arr[j+1] < arr[j])
-                {
-                    larger_item.style.backgroundColor= 'crimson';
-                    smaller_item.style.background = 'purple';
-                    temp=smaller_item.style.height;
-                    smaller_item.style.height= larger_item.style.height;
-                    larger_item.style.height= temp;
-
-                    temp= arr[j+1]; 
-                    arr[j+1]= arr[j];
-                    arr[j]= temp;
-
-                }
-                
-            }, j*delay/speed_mul);            
-        }
-        valueSwap(j);
-    }
-}
-function timedBubbleSort(arr)
+//TIMED INSERTION SORT
+function insertionSort(values)
 {
-    let i=0;
-    let reduce_delay=250;
-    for(i=0;i<arr.length-1;i++)
+    let array = values;
+    for (let i = 1; i <array.length; i++)
     {
-        function sortIterate(i)
+        let current = array[i];
+        let j = i-1; 
+        while ((j > -1) && (current < array[j]))
         {
-            setTimeout(() => {
-                reduce_delay= 250;
-                if(i!=0)
-                {
-                    reduce_delay= i*reduce_delay;
-                }
-                console.log('the delay is reduced by: ' + reduce_delay)
-                sortCheck();
-                resetColor();
-            }, (i*outterDelay/speed_multiplyer),i,innerDelay,speed_multiplyer);
+            updateDivs(j, j+1, 'check');
+            updateDivs(j, j+1, 'reset previous');
+            array[j+1] = array[j];
+            j--;
         }
-        sortIterate(i);
+        array[j+1] = current;
+        updateDivs(current, j+1, 'swap');
+    }
+    console.log(values);
+}
+//TIMED SELECTION SORT
+function selectionSort(values)
+{
+    addedDelay = 0;
+    let array = values;
+    for (let i = 0; i<array.length; i++) 
+    {
+        let min = i;
+        for (let j = i + 1; j<array.length; j++) 
+        {
+            updateDivs(min, j, 'check');
+            updateDivs(min, j, 'reset previous');
+            if (array[min] > array[j])
+            {
+                min = j;
+            }
+        }
+        if (min !== i) {
+            updateDivs(min, i,'swap');
+            let tmp = array[i];
+            array[i] = array[min];
+            array[min] = tmp;
+        }
     }
 }
-//END
+
+
+
+
+function bubbleSort(values)
+{
+    addedDelay = 0;
+    let array = values;
+    for(i=0;i<array.length-1;i++)
+    {
+        for(j=0;j<array.length-1-i;j++)
+        {
+            updateDivs(j, j+1, 'check');
+            updateDivs(j, j+1, 'reset previous');
+            if(array[j+1] < array[j])
+            {
+                updateDivs(j, j+1, 'swap');
+                let tmp = array[j+1];
+                array[j+1] = array[j];
+                array[j] = tmp;
+            }
+        }
+    }
+    console.log(`the sorted array is ${array}`);
+}
+
+function updateDivs(currentIndex,nextIndex, action)
+{
+//    let totalDelay = (delay + addedDelay)/speed_value;
+    let totalDelay = (delay + addedDelay);
+  //  console.log(`the total delay is = ${totalDelay} and delay = ${delay} and added delay = ${addedDelay}`);
+    let intervalId = setTimeout(()=>{
+        console.log('update called');
+        resetColor();
+        let current_item= document.getElementById(currentIndex);    
+        let next_item= document.getElementById(nextIndex);
+        if(action === 'check')
+        {
+            current_item.style.backgroundColor = "black";
+            next_item.style.backgroundColor = "black";
+            
+        }
+        if(action === 'reset previous')
+        {
+            if(currentIndex !=0 )
+            {
+                let previous_item= document.getElementById(currentIndex-1);
+                current_item.style.backgroundColor = 'hotpink';
+                previous_item.style.backgroundColor= 'hotpink';
+            }
+        }
+        if(action === 'swap')
+        {
+            console.log(`the value of the first parameter ${currentIndex}`);
+            current_item.style.backgroundColor= 'crimson';
+            next_item.style.background = 'purple';
+            let temp=next_item.style.height;
+            next_item.style.height= current_item.style.height;
+            current_item.style.height= temp;
+        }
+        if(action == 'insert')
+        {
+
+        }
+    
+        },totalDelay);
+        addedDelay += 50;
+        delay = 50;
+    
+        return intervalId;
+}
 
 // FUNCTION TO RESET COLOR OF ITEMS
 function resetColor()
@@ -119,16 +165,35 @@ function resetColor()
 // START BUTTON
 let start_btn= document.getElementById('start');
 start_btn.addEventListener('click',function(e){
-   timedBubbleSort(values);
-   console.log('start clicked');
+
+    speed_value.disabled = true;
+    let selectedAlgorithm = document.getElementById('selector').value;
+    if(selectedAlgorithm == 'bubble')
+    {
+        bubbleSort(values);
+    }
+    else if(selectedAlgorithm == 'selection')
+    {
+        selectionSort(values);
+    }
+    else if(selectedAlgorithm == 'insertion')
+    {
+        insertionSort(values);
+    }
+    else
+    {
+        console.log(`i don't know what have you selected`);
+    }
+  
+   
 });
 
 // RESET BUTTON
 let reset_btn= document.getElementById('reset');
+speed_value.disabled = false;
 reset_btn.addEventListener('click',function(e){
     let no_of_elements = input_elements.value;
     values= fillArray(no_of_elements);
-    console.log('reset clicked');
 });
 
 // SPEED VALUE RANGE SLIDER
@@ -147,6 +212,7 @@ remove_btn.addEventListener('click',function(e){
     }
     sort_box.style.animationName = 'hideBox';
     create_btn.disabled = false;
+    speed_value.disabled = false;
     create_btn.className = "btn panel_item create size_one enabled";
     start_btn.style.visibility = 'hidden';
     reset_btn.style.visibility = 'hidden';
@@ -199,7 +265,6 @@ create_btn.addEventListener('click',function (e)
  
 // BUTTON EFFECT
 let buttons = document.getElementsByTagName('button');
-console.log(buttons);
 for(let button of buttons)
 {
     button.addEventListener('click',(e)=>{
@@ -218,5 +283,3 @@ for(let button of buttons)
 
     });
 }
-
-
