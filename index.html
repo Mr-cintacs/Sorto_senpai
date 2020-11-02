@@ -19,27 +19,32 @@
         </div>
         <div class="panel_item size_two">
             <label for="elements">ELEMENTS</label>
-            <input type="number" name="elements" id="no_of_elements" value="25" min="10">
+            <input type="number" name="elements" id="no_of_elements" value="25" min="10" max="110">
         </div>
-        <button class="btn panel_item create size_three" id="create">CREATE</button>
-        <select name="" id="selector">
+
+        <select class='panel_item' name="" id="selector">
             <option value="bubble">Bubble Sort</option>
             <option value="selection">Selection Sort</option>
         </select>
+
+        <button class="btn panel_item create size_three" id="create">CREATE</button>
+       
     </div>
     <div id="instructions_panel">
-        <p id='instruction'>Sorto-Senpai is a tool to visualize sorting algorithms</p>
-        <p id='instruction'>Select the number of elements</p>
-        <p id='instruction'>Set the speed and click create</p>
-        <p id='instruction'>Click reset to change the values of the current array</p>
-        <p id='instruction'>To set up new aaray click remove all & create array</p>
+        <div class="instructions">
+            <p class='main' id='instruction'>Sorto-Senpai is a tool to visualize sorting algorithms</p>
+            <p id='instruction'>Select the number of elements</p>
+            <p id='instruction'>Set the speed and click create</p>
+            <p id='instruction'>Click reset to change the values of the current array</p>
+            <p id='instruction'>To set up new array click remove all & create array</p>
+        </div>
     </div>
     
     <div class="wrap">
         <div class="container" id="sort-box">
         </div>
         <div class="buttons">
-            <button class='btn hide' id="start">START</button>
+            <button class='btn hide ' id="start">START</button>
             <button class='btn hide' id="reset">RESET</button>
             <button class="btn long hide" id="remove">REMOVE ALL</button>
         </div>

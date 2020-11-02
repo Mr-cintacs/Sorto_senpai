@@ -1,8 +1,7 @@
 import * as helper from "./helper.js";
-let values,items,innerDelay,outterDelay,speed_multiplyer=5;
-let height_multiplyer = 3;
+let values,items,speed_multiplyer=5;
 let wrapContainer = document.querySelector('.wrap');
-console.log(wrapContainer);
+let instructions_panel = document.querySelector('#instructions_panel');
 let speed_value = document.getElementById('speed'); 
 let sort_box = document.getElementById('sort-box');
 let input_elements= document.getElementById('no_of_elements');
@@ -167,6 +166,7 @@ speed_value.disabled = false;
 reset_btn.addEventListener('click',function(e){
     let no_of_elements = input_elements.value;
     values= helper.fillArray(no_of_elements);
+    resetColor();
 });
 
 // SPEED VALUE RANGE SLIDER
@@ -190,6 +190,7 @@ remove_btn.addEventListener('click',function(e){
     start_btn.style.visibility = 'hidden';
     reset_btn.style.visibility = 'hidden';
     remove_btn.style.visibility = 'hidden';
+   // instructions_panel.style.display = 'block';
 
 });
 
@@ -204,14 +205,14 @@ create_btn.addEventListener('click',function (e)
     reset_btn.style.visibility = 'visible';
     remove_btn.style.visibility = 'visible';
     sort_box.style.animationName = 'showBox';
+    instructions_panel.style.display = 'none';
     wrapContainer.style.display = 'flex';
     let no_of_elements = input_elements.value;
     if(no_of_elements > 50)
     {
         change_size = true;
     }
-    innerDelay = 250;
-    outterDelay = 250 * no_of_elements;
+    
    
     for(i=0;i<no_of_elements;i++)
     {
@@ -232,6 +233,7 @@ create_btn.addEventListener('click',function (e)
     items = document.getElementsByClassName('item');
     for(let item of items)
     {
+        item.style.backgroundColor = 'hotpink';
         item.style.display= 'block';
     }
    

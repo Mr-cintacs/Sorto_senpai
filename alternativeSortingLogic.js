@@ -1,3 +1,7 @@
+//DELAY SET BEFORE STARTING ALGORITHM
+innerDelay = 250;
+outterDelay = 250 * no_of_elements;
+
 //TIMED BUBBLE SORT
 function timedSort(arr,sortingFunction)
 {
