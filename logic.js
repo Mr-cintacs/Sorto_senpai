@@ -79,8 +79,8 @@ function bubbleSort(values)
 
 function updateDivs(currentIndex,nextIndex, action)
 {
-//    let totalDelay = (delay + addedDelay)/speed_value;
-    let totalDelay = (delay + addedDelay);
+    let totalDelay = (delay + addedDelay)/speed_multiplyer;
+    //let totalDelay = (delay + addedDelay);
   //  console.log(`the total delay is = ${totalDelay} and delay = ${delay} and added delay = ${addedDelay}`);
     let intervalId = setTimeout(()=>{
         console.log('update called');
@@ -115,10 +115,9 @@ function updateDivs(currentIndex,nextIndex, action)
         {
 
         }
-    
-        },totalDelay);
-        addedDelay += 50;
-        delay = 50;
+    },totalDelay);
+    addedDelay += 250;
+    delay = 250;
     
         return intervalId;
 }
@@ -172,6 +171,7 @@ reset_btn.addEventListener('click',function(e){
 // SPEED VALUE RANGE SLIDER
 speed_value.addEventListener('input',function(e){
     speed_multiplyer = speed_value.value;
+    console.log(`the speed multiplyer ${speed_multiplyer}`);
 });
 
 // REMOVE BUTTON
@@ -190,8 +190,6 @@ remove_btn.addEventListener('click',function(e){
     start_btn.style.visibility = 'hidden';
     reset_btn.style.visibility = 'hidden';
     remove_btn.style.visibility = 'hidden';
-   // instructions_panel.style.display = 'block';
-
 });
 
 // CREATE BUTTON
@@ -226,10 +224,8 @@ create_btn.addEventListener('click',function (e)
             div.style.padding = 2 + 'px';
         }
     }
-
     values = helper.fillArray(no_of_elements);
     sort_box.style.display= 'flex';
-    
     items = document.getElementsByClassName('item');
     for(let item of items)
     {
