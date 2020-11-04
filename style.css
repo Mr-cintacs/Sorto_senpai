@@ -7,19 +7,21 @@
     margin:0;
     padding:0;
 }
-header{
-    text-align:center;
-    padding:10px;
-    color:#F4E9CD;
-    font-size:2rem;
-    font-family: 'Montserrat', sans-serif;
-}
 body{
     /* background-color:#031926; */
     background-color:#468189;
     color:#ffffff;
     font-family: 'Montserrat', sans-serif;
 }
+header{
+    text-align:center;
+    position:relative;
+    padding:10px;
+    color:#F4E9CD;
+    font-size:2rem;
+    font-family: 'Montserrat', sans-serif; 
+}
+
 .panel{
     display:flex;
     width:60%;
